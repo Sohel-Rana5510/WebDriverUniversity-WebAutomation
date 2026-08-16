@@ -13,6 +13,14 @@ export class FileUploadPage extends BasePage {
   }
 
   async uploadFile(mimeType: string, fileName: string, buffer: Uint8Array | Buffer): Promise<void> {
+    // Clear previous result/error messages before uploading
+    await this.page.evaluate(() => {
+      const resultEl = document.getElementById('file-result');
+      const errorEl = document.getElementById('file-error');
+      if (resultEl) resultEl.textContent = '';
+      if (errorEl) errorEl.textContent = '';
+    });
+    
     await this.fileInput.setInputFiles({ name: fileName, mimeType, buffer: Buffer.from(buffer) });
     await this.submitButton.click();
     await this.waitTwoSeconds();
