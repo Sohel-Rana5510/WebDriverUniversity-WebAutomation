@@ -34,11 +34,15 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # 5. Run Playwright tests
-      - name: Run Playwright Tests
-        run: npx playwright test
+      # 5. Install system dependencies for headless browser
+      - name: Install xvfb (virtual display server)
+        run: sudo apt-get update && sudo apt-get install -y xvfb
 
-      # 6. Upload Playwright report
+      # 6. Run Playwright tests with virtual display
+      - name: Run Playwright Tests
+        run: xvfb-run -a npx playwright test
+
+      # 7. Upload Playwright report
       - name: Upload Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
