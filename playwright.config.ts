@@ -32,9 +32,9 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    /* Launch browsers in headed mode by default for local debugging */
-    headless: false,
-   viewport: { width: 1280, height: 720 },
+    /* Launch browsers in headless mode on CI, headed mode locally for debugging */
+    headless: !process.env.CI,
+    viewport: { width: 1280, height: 720 },
     launchOptions: {
       args: ['--start-maximized'],
     },
