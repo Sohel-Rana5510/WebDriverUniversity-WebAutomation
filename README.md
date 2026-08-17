@@ -48,3 +48,4 @@ npx playwright show-report
 - Page locators and actions are encapsulated in page object classes under `tests/pageObjects/`.
 - Tests focus on user-facing behavior and value-based assertions rather than simple element existence.
 - Explicit waits are used instead of hard-coded sleeps, and the suite is structured to remain independent and repeatable.
+..................
